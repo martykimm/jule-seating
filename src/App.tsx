@@ -78,12 +78,12 @@ export default function App() {
   function spinForSeat() {
     if (isSpinning) return;
     if (availableSeats.length === 0) {
-      setMessage("Alle pladser er taget.");
+      setMessage("🎄 Alle pladser er taget. God jul!");
       return;
     }
 
     setIsSpinning(true);
-    setMessage(null);
+    setMessage("🎅 Nisserne lodtrækker...");
 
     let currentIndex = 0;
     let remainingSteps = 28 + Math.floor(Math.random() * 18);
@@ -107,6 +107,17 @@ export default function App() {
 
         setLastResult(finalSeat);
         setIsSpinning(false);
+        
+        // Festive success messages
+        const messages = [
+          "🎉 Tillykke! Din plads venter!",
+          "⭐ God plads! Glædelig jul!",
+          "🎄 Perfekt! Sid godt!",
+          "🎅 Nisserne har talt!",
+          "✨ Din lucky plads er klar!"
+        ];
+        setMessage(messages[Math.floor(Math.random() * messages.length)]);
+        
         return;
       }
 
@@ -160,11 +171,11 @@ export default function App() {
       <div className="app-container">
         <header className="app-header">
           <div className="app-title-block">
-            <div className="app-badge">Julefrokost 2025</div>
+            <div className="app-badge">🎄 Julefrokost 2025 🎄</div>
             <h1 className="app-title">Jule Seating Engine</h1>
             <p className="app-subtitle">
-              Lodtrækning til langbordet. Hvid jul, dansk hygge og helt fair
-              pladser.
+              🎅 Lodtrækning til langbordet. Hvid jul, dansk hygge og helt fair
+              pladser. God jul! ⭐
             </p>
 
             <div className="app-garland">
@@ -176,10 +187,10 @@ export default function App() {
             </div>
 
             <div className="hygge-tagline">
-              <span className="hygge-pill">Hvid jul</span>
-              <span className="hygge-pill">Langbord &amp; snak</span>
-              <span className="hygge-pill">Dansk julemad</span>
-              <span className="hygge-pill">Nissevenlig lodtrækning</span>
+              <span className="hygge-pill">❄️ Hvid jul</span>
+              <span className="hygge-pill">🍽️ Langbord &amp; snak</span>
+              <span className="hygge-pill">🎄 Dansk julemad</span>
+              <span className="hygge-pill">🎅 Nissevenlig lodtrækning</span>
             </div>
           </div>
 
@@ -200,7 +211,7 @@ export default function App() {
               />
             </div>
             <button onClick={handleReset} className="reset-button">
-              Nulstil pladekort
+              🔄 Nulstil pladekort
             </button>
           </div>
         </header>
@@ -244,7 +255,7 @@ export default function App() {
             </div>
 
             <div className="status-bar">
-              <span>Ledige pladser: {availableSeats.length}</span>
+              <span>🎁 Ledige pladser: {availableSeats.length}</span>
               {message && <span className="status-message">{message}</span>}
             </div>
           </div>
@@ -261,54 +272,54 @@ export default function App() {
               }
             >
               {availableSeats.length === 0
-                ? "Alle pladser er taget"
+                ? "🎄 Alle pladser er taget 🎄"
                 : isSpinning
-                ? "Finder plads..."
-                : "TRÆK DIN JULEPLADS"}
+                ? "🎅 Finder plads... 🎅"
+                : "🎁 TRÆK DIN JULEPLADS 🎁"}
             </button>
 
             <div className="result-card result-card--xmas">
-              <h2 className="result-title">Sidste lodtrækning</h2>
+              <h2 className="result-title">⭐ Sidste lodtrækning ⭐</h2>
               {lastResult ? (
                 <div className="result-big">
-                  <div className="result-label">Din plads</div>
+                  <div className="result-label">🎄 Din plads</div>
                   <div className="result-value">{lastResult.id}</div>
                   <div className="result-hint">
-                    Find nummeret på bordet. Resten er snak, latter og hygge.
+                    Find nummeret på bordet. Resten er snak, latter og hygge. God jul! 🎅
                   </div>
                 </div>
               ) : (
                 <div className="result-placeholder">
-                  Gå op til skærmen, tryk på knappen og få din juleplads.
+                  🎁 Gå op til skærmen, tryk på knappen og få din juleplads. ✨
                 </div>
               )}
             </div>
 
             <div className="xmas-card">
-              <div className="xmas-card-header">Julehygge regler</div>
+              <div className="xmas-card-header">🎄 Julehygge regler 🎄</div>
               <p className="xmas-card-text">
-                Lodtrækningen er helt tilfældig. Alle ledige pladser har samme
+                🎅 Lodtrækningen er helt tilfældig. Alle ledige pladser har samme
                 chance. Det eneste ikke-tilfældige er hyggen omkring bordet.
               </p>
               <p className="xmas-card-text">
-                Når du har fået en plads, så find din stol, hæld noget i glasset
-                og giv plads til den næste i køen.
+                ⭐ Når du har fået en plads, så find din stol, hæld noget i glasset
+                og giv plads til den næste i køen. Glædelig jul!
               </p>
             </div>
 
             <div className="legend-card legend-card--xmas">
-              <h3 className="legend-title">Pladekort</h3>
+              <h3 className="legend-title">🎁 Pladekort</h3>
               <div className="legend-row">
                 <span className="legend-dot legend-dot--free" />
-                <span>Ledig plads</span>
+                <span>✨ Ledig plads</span>
               </div>
               <div className="legend-row">
                 <span className="legend-dot legend-dot--assigned" />
-                <span>Plads er taget</span>
+                <span>🎄 Plads er taget</span>
               </div>
               <div className="legend-row">
                 <span className="legend-dot legend-dot--highlight" />
-                <span>Aktuel lodtrækning</span>
+                <span>⭐ Aktuel lodtrækning</span>
               </div>
             </div>
           </aside>
