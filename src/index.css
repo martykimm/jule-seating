@@ -15,7 +15,7 @@ body,
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  background: radial-gradient(circle at top, #020617 0, #020617 45%, #000 100%);
+  background: radial-gradient(circle at top, #020617 0, #020617 45%, #020617);
   color: #e5e7eb;
 }
 
@@ -35,15 +35,15 @@ body {
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(circle at 15% 15%, rgba(220, 38, 38, 0.18), transparent),
-    radial-gradient(circle at 85% 80%, rgba(22, 163, 74, 0.22), transparent),
-    radial-gradient(circle at 50% 50%, rgba(250, 204, 21, 0.1), transparent);
+    radial-gradient(circle at 15% 15%, rgba(220, 38, 38, 0.28), transparent),
+    radial-gradient(circle at 85% 80%, rgba(22, 163, 74, 0.26), transparent),
+    radial-gradient(circle at 50% 50%, rgba(250, 204, 21, 0.14), transparent);
   opacity: 0.9;
   filter: blur(40px);
   z-index: 0;
 }
 
-/* Snow overlay */
+/* Sne-overlay */
 
 .snow-layer {
   position: fixed;
@@ -55,7 +55,7 @@ body {
   background-repeat: repeat;
   z-index: 1;
   mix-blend-mode: screen;
-  opacity: 0.16;
+  opacity: 0.18;
 }
 
 .snow-layer--slow {
@@ -66,7 +66,7 @@ body {
 .snow-layer--fast {
   background-size: 80px 80px, 140px 140px;
   animation: snowDrift 22s linear infinite reverse;
-  opacity: 0.12;
+  opacity: 0.13;
 }
 
 @keyframes snowDrift {
@@ -78,17 +78,195 @@ body {
   }
 }
 
+/* Snebakke nederst – hvid jul */
+
+.snow-hill {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -40%;
+  height: 60%;
+  background: radial-gradient(circle at 50% 0%, #f9fafb, #e5e7eb, #d1d5db);
+  border-radius: 50% 50% 0 0;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+/* Skov-silhuet */
+
+.xmas-forest {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  z-index: 1;
+}
+
+.xmas-forest--left {
+  left: 6%;
+}
+
+.xmas-forest--right {
+  right: 6%;
+  align-items: flex-end;
+}
+
+.xmas-tree {
+  width: 42px;
+  height: 42px;
+  position: relative;
+}
+
+.xmas-tree::before,
+.xmas-tree::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.xmas-tree::before {
+  bottom: 8px;
+  width: 0;
+  height: 0;
+  border-left: 22px solid transparent;
+  border-right: 22px solid transparent;
+  border-bottom: 34px solid rgba(15, 23, 42, 0.95);
+  filter: drop-shadow(0 6px 4px rgba(15, 23, 42, 0.9));
+}
+
+.xmas-tree::after {
+  bottom: 0;
+  width: 7px;
+  height: 10px;
+  background: rgba(15, 23, 42, 0.96);
+  border-radius: 2px;
+}
+
+.xmas-tree--small {
+  width: 30px;
+  height: 30px;
+}
+.xmas-tree--small::before {
+  border-left-width: 16px;
+  border-right-width: 16px;
+  border-bottom-width: 25px;
+}
+
+/* Slæde + “rensdyr”-bånd */
+
+.xmas-sleigh-band {
+  position: absolute;
+  top: 1.4rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.75;
+}
+
+.sleigh,
+.reindeer {
+  display: inline-block;
+  position: relative;
+}
+
+.sleigh {
+  width: 26px;
+  height: 14px;
+  border-radius: 3px;
+  background: #f9fafb;
+  box-shadow:
+    0 0 8px rgba(248, 250, 252, 0.9),
+    0 1px 0 rgba(15, 23, 42, 0.8);
+}
+
+.sleigh::before,
+.sleigh::after {
+  content: "";
+  position: absolute;
+}
+
+.sleigh::before {
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 999px;
+  background: #e5e7eb;
+}
+
+.sleigh::after {
+  top: -8px;
+  right: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 2px solid #fef9c3;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  transform: rotate(40deg);
+}
+
+.reindeer {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  box-shadow: 0 0 7px rgba(248, 250, 252, 0.9);
+}
+
+.reindeer::before,
+.reindeer::after {
+  content: "";
+  position: absolute;
+}
+
+.reindeer::before {
+  top: -4px;
+  left: 3px;
+  width: 3px;
+  height: 7px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  box-shadow: 5px 0 0 #e5e7eb;
+}
+
+.reindeer::after {
+  bottom: -3px;
+  left: 3px;
+  width: 8px;
+  height: 3px;
+  border-radius: 999px;
+  background: #e5e7eb;
+}
+
+.reindeer--front {
+  transform: translateY(-1px);
+}
+
+.reindeer--small {
+  width: 10px;
+  height: 10px;
+}
+
+/* App container */
+
 .app-container {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   width: 100%;
   max-width: 1200px;
   border-radius: 1.75rem;
-  border: 1px solid rgba(248, 250, 252, 0.12);
+  border: 1px solid rgba(15, 23, 42, 0.4);
   background: radial-gradient(
     circle at 10% 0%,
-    rgba(15, 23, 42, 1),
-    rgba(15, 23, 42, 0.98)
+    rgba(15, 23, 42, 0.98),
+    rgba(15, 23, 42, 0.96)
   );
   box-shadow:
     0 25px 80px rgba(15, 23, 42, 0.9),
@@ -310,7 +488,7 @@ body {
     0 18px 50px rgba(15, 23, 42, 0.9);
 }
 
-/* Stearinlys midt på bordet */
+/* Stearinlys */
 
 .table-candles {
   position: absolute;
@@ -417,7 +595,7 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 1.25rem;
-  background: radial-gradient(circle at top, #111827, #020617);
+  background: radial-gradient(circle at top, #1f2937, #020617);
   border: 1px solid rgba(148, 163, 184, 0.85);
   display: flex;
   align-items: center;
@@ -730,64 +908,6 @@ body {
 .legend-dot--highlight {
   background: #facc15;
   box-shadow: 0 0 10px rgba(250, 204, 21, 0.9);
-}
-
-/* History / pladekort */
-
-.history-card {
-  width: 100%;
-  border-radius: 1rem;
-  border: 1px solid rgba(55, 65, 81, 0.9);
-  background: radial-gradient(circle at 0 0, #111827, #020617);
-  padding: 0.85rem 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  max-height: 180px;
-  overflow: hidden;
-}
-
-.history-title {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #9ca3af;
-  margin: 0;
-}
-
-.history-empty {
-  font-size: 0.85rem;
-  color: #e5e7eb;
-  opacity: 0.85;
-}
-
-.history-list {
-  margin-top: 0.3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  overflow-y: auto;
-  padding-right: 0.2rem;
-}
-
-.history-item {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  padding: 0.3rem 0.45rem;
-  border-radius: 0.5rem;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(55, 65, 81, 0.8);
-}
-
-.history-seat-number {
-  font-weight: 600;
-  color: #fef9c3;
-}
-
-.history-seat-meta {
-  color: #9ca3af;
-  font-size: 0.8rem;
 }
 
 /* Responsiv */

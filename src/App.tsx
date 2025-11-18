@@ -54,7 +54,6 @@ export default function App() {
   const [isSpinning, setIsSpinning] = useState(false);
   const [lastResult, setLastResult] = useState<Seat | null>(null);
   const [message, setMessage] = useState<string | null>(null);
-  const [history, setHistory] = usePersistentState<Seat[]>("seatHistory", []);
 
   useEffect(() => {
     if (seats.length !== seatCount) {
@@ -63,9 +62,8 @@ export default function App() {
       setLastResult(null);
       setMessage(null);
       setHighlightSeatId(null);
-      setHistory([]);
     }
-  }, [seatCount, seats.length, setSeats, setHistory]);
+  }, [seatCount, seats.length, setSeats]);
 
   const availableSeats = seats.filter((s) => !s.assigned);
 
@@ -75,7 +73,6 @@ export default function App() {
     setMessage(null);
     setHighlightSeatId(null);
     setIsSpinning(false);
-    setHistory([]);
   }
 
   function spinForSeat() {
@@ -109,7 +106,6 @@ export default function App() {
         );
 
         setLastResult(finalSeat);
-        setHistory((prev) => [...prev, finalSeat]);
         setIsSpinning(false);
         return;
       }
@@ -129,6 +125,21 @@ export default function App() {
       <div className="app-backdrop" />
       <div className="snow-layer snow-layer--slow" />
       <div className="snow-layer snow-layer--fast" />
+      <div className="snow-hill" />
+      <div className="xmas-forest xmas-forest--left">
+        <div className="xmas-tree" />
+        <div className="xmas-tree xmas-tree--small" />
+      </div>
+      <div className="xmas-forest xmas-forest--right">
+        <div className="xmas-tree" />
+        <div className="xmas-tree xmas-tree--small" />
+      </div>
+      <div className="xmas-sleigh-band">
+        <span className="sleigh" />
+        <span className="reindeer reindeer--front" />
+        <span className="reindeer" />
+        <span className="reindeer reindeer--small" />
+      </div>
 
       <div className="app-container">
         <header className="app-header">
@@ -136,7 +147,7 @@ export default function App() {
             <div className="app-badge">Julefrokost 2025</div>
             <h1 className="app-title">Jule Seating Engine</h1>
             <p className="app-subtitle">
-              Lodtrækning til langbordet. Dansk hygge, levende lys og helt fair
+              Lodtrækning til langbordet. Hvid jul, dansk hygge og helt fair
               pladser.
             </p>
 
@@ -149,9 +160,9 @@ export default function App() {
             </div>
 
             <div className="hygge-tagline">
-              <span className="hygge-pill">Stearinlys</span>
-              <span className="hygge-pill">Gløgg</span>
-              <span className="hygge-pill">Risalamande</span>
+              <span className="hygge-pill">Hvid jul</span>
+              <span className="hygge-pill">Stearinlys på bordet</span>
+              <span className="hygge-pill">Dansk julemad</span>
               <span className="hygge-pill">Snak på kryds og tværs</span>
             </div>
           </div>
@@ -276,11 +287,11 @@ export default function App() {
               <div className="xmas-card-header">Julehygge regler</div>
               <p className="xmas-card-text">
                 Lodtrækningen er helt tilfældig. Alle ledige pladser har samme
-                chance. Det eneste ikke-tilfældige er hyggen.
+                chance. Det eneste ikke-tilfældige er hyggen omkring bordet.
               </p>
               <p className="xmas-card-text">
-                Når du har fået en plads, så hjælp den næste op til skærmen og
-                hold øje med hvilket sæde der lyser op.
+                Når du har fået en plads, så find din stol, hæld noget i glasset
+                og giv plads til den næste i køen.
               </p>
             </div>
 
@@ -298,31 +309,6 @@ export default function App() {
                 <span className="legend-dot legend-dot--highlight" />
                 <span>Aktuel lodtrækning</span>
               </div>
-            </div>
-
-            <div className="history-card">
-              <h3 className="history-title">Trukne pladser</h3>
-              {history.length === 0 ? (
-                <div className="history-empty">
-                  Ingen pladser endnu. Første lodtrækning sætter stemningen.
-                </div>
-              ) : (
-                <div className="history-list">
-                  {history
-                    .slice()
-                    .reverse()
-                    .map((seat) => (
-                      <div key={seat.id} className="history-item">
-                        <span className="history-seat-number">
-                          Plads {seat.id}
-                        </span>
-                        <span className="history-seat-meta">
-                          {seat.side === "top" ? "Øverste række" : "Nederste række"}
-                        </span>
-                      </div>
-                    ))}
-                </div>
-              )}
             </div>
           </aside>
         </main>
