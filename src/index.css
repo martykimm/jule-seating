@@ -35,15 +35,15 @@ body {
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(circle at 15% 15%, rgba(220, 38, 38, 0.28), transparent),
-    radial-gradient(circle at 85% 80%, rgba(22, 163, 74, 0.26), transparent),
-    radial-gradient(circle at 50% 50%, rgba(250, 204, 21, 0.14), transparent);
+    radial-gradient(circle at 15% 15%, rgba(220, 38, 38, 0.24), transparent),
+    radial-gradient(circle at 85% 80%, rgba(22, 163, 74, 0.22), transparent),
+    radial-gradient(circle at 50% 50%, rgba(250, 204, 21, 0.12), transparent);
   opacity: 0.9;
   filter: blur(40px);
   z-index: 0;
 }
 
-/* Sne-overlay */
+/* Sne-overlay – stille sne */
 
 .snow-layer {
   position: fixed;
@@ -55,26 +55,35 @@ body {
   background-repeat: repeat;
   z-index: 1;
   mix-blend-mode: screen;
-  opacity: 0.18;
+  opacity: 0.16;
 }
 
 .snow-layer--slow {
-  background-size: 120px 120px, 200px 200px;
-  animation: snowDrift 40s linear infinite;
+  background-size: 140px 140px, 220px 220px;
+  animation: snowDriftSlow 55s linear infinite;
 }
 
 .snow-layer--fast {
-  background-size: 80px 80px, 140px 140px;
-  animation: snowDrift 22s linear infinite reverse;
-  opacity: 0.13;
+  background-size: 90px 90px, 150px 150px;
+  animation: snowDriftFast 38s linear infinite reverse;
+  opacity: 0.11;
 }
 
-@keyframes snowDrift {
+@keyframes snowDriftSlow {
   from {
-    transform: translate3d(0, -40px, 0);
+    transform: translate3d(0, -30px, 0);
   }
   to {
-    transform: translate3d(0, 40px, 0);
+    transform: translate3d(0, 30px, 0);
+  }
+}
+
+@keyframes snowDriftFast {
+  from {
+    transform: translate3d(-20px, -40px, 0);
+  }
+  to {
+    transform: translate3d(20px, 40px, 0);
   }
 }
 
@@ -154,104 +163,163 @@ body {
   border-bottom-width: 25px;
 }
 
-/* Slæde + “rensdyr”-bånd */
+/* Julemand i slæde – flyver hen over skærmen */
 
-.xmas-sleigh-band {
+.santa-flight {
   position: absolute;
-  top: 1.4rem;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  gap: 0.4rem;
+  top: 10%;
+  left: -20vw;
+  width: 140vw;
   pointer-events: none;
   z-index: 2;
-  opacity: 0.75;
 }
 
-.sleigh,
-.reindeer {
-  display: inline-block;
+.santa-sleigh {
+  width: 140px;
+  height: 40px;
   position: relative;
+  animation: santaFly 32s linear infinite;
 }
 
-.sleigh {
-  width: 26px;
-  height: 14px;
-  border-radius: 3px;
-  background: #f9fafb;
-  box-shadow:
-    0 0 8px rgba(248, 250, 252, 0.9),
-    0 1px 0 rgba(15, 23, 42, 0.8);
-}
+/* Slæden */
 
-.sleigh::before,
-.sleigh::after {
+.santa-sleigh::before,
+.santa-sleigh::after {
   content: "";
   position: absolute;
 }
 
-.sleigh::before {
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  border-radius: 999px;
-  background: #e5e7eb;
+.santa-sleigh::before {
+  /* slæde-krop */
+  bottom: 10px;
+  left: 22px;
+  width: 48px;
+  height: 18px;
+  border-radius: 5px;
+  background: #b91c1c;
+  box-shadow:
+    0 0 10px rgba(248, 250, 252, 0.8),
+    0 1px 0 rgba(15, 23, 42, 0.9);
 }
 
-.sleigh::after {
-  top: -8px;
-  right: 3px;
+.santa-sleigh::after {
+  /* meder */
+  bottom: 4px;
+  left: 18px;
+  width: 60px;
+  height: 4px;
+  border-radius: 999px;
+  background: #f9fafb;
+  box-shadow: 0 0 6px rgba(248, 250, 252, 0.9);
+}
+
+/* Julemanden (hoved + hue) */
+
+.santa-sleigh span {
+  position: absolute;
+  display: block;
+}
+
+.santa-head {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #fee2e2;
+  top: 4px;
+  left: 34px;
+  box-shadow: 0 0 8px rgba(248, 250, 252, 0.8);
+}
+
+.santa-hat {
+  width: 0;
+  height: 0;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-bottom: 18px solid #b91c1c;
+  position: absolute;
+  top: -12px;
+  left: 30px;
+  transform: rotate(-12deg);
+}
+
+.santa-hat::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: -6px;
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  border: 2px solid #fef9c3;
-  border-top-color: transparent;
-  border-left-color: transparent;
-  transform: rotate(40deg);
+  background: #f9fafb;
 }
 
-.reindeer {
-  width: 14px;
-  height: 14px;
+/* "Rensdyr" cirkler foran slæden */
+
+.santa-reindeer {
+  position: absolute;
+  top: 4px;
+  width: 16px;
+  height: 16px;
   border-radius: 999px;
   background: #e5e7eb;
-  box-shadow: 0 0 7px rgba(248, 250, 252, 0.9);
+  box-shadow: 0 0 8px rgba(248, 250, 252, 0.9);
 }
 
-.reindeer::before,
-.reindeer::after {
+.santa-reindeer::before,
+.santa-reindeer::after {
   content: "";
   position: absolute;
 }
 
-.reindeer::before {
+.santa-reindeer::before {
   top: -4px;
   left: 3px;
   width: 3px;
-  height: 7px;
+  height: 8px;
   border-radius: 999px;
   background: #e5e7eb;
-  box-shadow: 5px 0 0 #e5e7eb;
+  box-shadow: 6px 0 0 #e5e7eb;
 }
 
-.reindeer::after {
+.santa-reindeer::after {
   bottom: -3px;
   left: 3px;
-  width: 8px;
+  width: 10px;
   height: 3px;
   border-radius: 999px;
   background: #e5e7eb;
 }
 
-.reindeer--front {
-  transform: translateY(-1px);
+.santa-reindeer--1 {
+  left: 80px;
+}
+.santa-reindeer--2 {
+  left: 100px;
+}
+.santa-reindeer--3 {
+  left: 120px;
 }
 
-.reindeer--small {
-  width: 10px;
-  height: 10px;
+.santa-reindeer--1::after {
+  box-shadow: 0 0 8px rgba(248, 113, 113, 0.9);
+  background: #f97373; /* “rudolf”-næse vibe på forreste */
+}
+
+/* Flyve-animation */
+
+@keyframes santaFly {
+  0% {
+    transform: translate3d(-10vw, 0, 0) scale(0.9);
+  }
+  40% {
+    transform: translate3d(40vw, -18px, 0) scale(1.02);
+  }
+  80% {
+    transform: translate3d(95vw, 6px, 0) scale(0.9);
+  }
+  100% {
+    transform: translate3d(120vw, 10px, 0) scale(0.88);
+  }
 }
 
 /* App container */
@@ -486,64 +554,6 @@ body {
   box-shadow:
     inset 0 0 60px rgba(15, 23, 42, 0.9),
     0 18px 50px rgba(15, 23, 42, 0.9);
-}
-
-/* Stearinlys */
-
-.table-candles {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  pointer-events: none;
-  padding-top: 0.5rem;
-  z-index: 1;
-  gap: 0.7rem;
-}
-
-.candle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.1rem;
-}
-
-.candle--small .candle-body {
-  height: 14px;
-}
-
-.candle-flame {
-  width: 10px;
-  height: 16px;
-  border-radius: 999px 999px 60% 60%;
-  background: radial-gradient(circle at 50% 20%, #fef9c3, #fb923c);
-  box-shadow:
-    0 0 12px rgba(251, 191, 36, 0.7),
-    0 0 24px rgba(252, 211, 77, 0.9);
-  animation: candleFlicker 1.4s ease-in-out infinite alternate;
-}
-
-.candle-body {
-  width: 10px;
-  height: 18px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #f9fafb, #e5e7eb);
-  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.5);
-}
-
-@keyframes candleFlicker {
-  from {
-    transform: translateY(0) scale(1);
-    box-shadow:
-      0 0 10px rgba(251, 191, 36, 0.7),
-      0 0 18px rgba(252, 211, 77, 0.8);
-  }
-  to {
-    transform: translateY(-1px) scale(1.05);
-    box-shadow:
-      0 0 14px rgba(251, 191, 36, 0.9),
-      0 0 26px rgba(252, 211, 77, 0.95);
-  }
 }
 
 /* Seat rows */

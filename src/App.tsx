@@ -134,11 +134,8 @@ export default function App() {
         <div className="xmas-tree" />
         <div className="xmas-tree xmas-tree--small" />
       </div>
-      <div className="xmas-sleigh-band">
-        <span className="sleigh" />
-        <span className="reindeer reindeer--front" />
-        <span className="reindeer" />
-        <span className="reindeer reindeer--small" />
+      <div className="santa-flight">
+        <div className="santa-sleigh" />
       </div>
 
       <div className="app-container">
@@ -161,9 +158,9 @@ export default function App() {
 
             <div className="hygge-tagline">
               <span className="hygge-pill">Hvid jul</span>
-              <span className="hygge-pill">Stearinlys på bordet</span>
+              <span className="hygge-pill">Langbord &amp; snak</span>
               <span className="hygge-pill">Dansk julemad</span>
-              <span className="hygge-pill">Snak på kryds og tværs</span>
+              <span className="hygge-pill">Nissevenlig lodtrækning</span>
             </div>
           </div>
 
@@ -192,21 +189,6 @@ export default function App() {
         <main className="app-main">
           <div className="table-wrapper">
             <div className="table-area">
-              <div className="table-candles">
-                <div className="candle">
-                  <div className="candle-flame" />
-                  <div className="candle-body" />
-                </div>
-                <div className="candle candle--small">
-                  <div className="candle-flame" />
-                  <div className="candle-body" />
-                </div>
-                <div className="candle">
-                  <div className="candle-flame" />
-                  <div className="candle-body" />
-                </div>
-              </div>
-
               <div className="seat-row seat-row--top">
                 {topSeats.map((seat) => (
                   <SeatBubble
