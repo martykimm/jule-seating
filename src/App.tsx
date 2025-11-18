@@ -54,15 +54,18 @@ export default function App() {
   const [isSpinning, setIsSpinning] = useState(false);
   const [lastResult, setLastResult] = useState<Seat | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [history, setHistory] = usePersistentState<Seat[]>("seatHistory", []);
 
   useEffect(() => {
     if (seats.length !== seatCount) {
-      setSeats(generateSeats(seatCount));
+      const newSeats = generateSeats(seatCount);
+      setSeats(newSeats);
       setLastResult(null);
       setMessage(null);
       setHighlightSeatId(null);
+      setHistory([]);
     }
-  }, [seatCount, seats.length, setSeats]);
+  }, [seatCount, seats.length, setSeats, setHistory]);
 
   const availableSeats = seats.filter((s) => !s.assigned);
 
@@ -72,6 +75,7 @@ export default function App() {
     setMessage(null);
     setHighlightSeatId(null);
     setIsSpinning(false);
+    setHistory([]);
   }
 
   function spinForSeat() {
@@ -85,8 +89,8 @@ export default function App() {
     setMessage(null);
 
     let currentIndex = 0;
-    let remainingSteps = 25 + Math.floor(Math.random() * 15);
-    let delay = 40;
+    let remainingSteps = 28 + Math.floor(Math.random() * 18);
+    let delay = 42;
     const seatsPool = [...availableSeats];
 
     const step = () => {
@@ -105,6 +109,7 @@ export default function App() {
         );
 
         setLastResult(finalSeat);
+        setHistory((prev) => [...prev, finalSeat]);
         setIsSpinning(false);
         return;
       }
@@ -128,10 +133,11 @@ export default function App() {
       <div className="app-container">
         <header className="app-header">
           <div className="app-title-block">
-            <div className="app-badge">Julefrokost 2024</div>
+            <div className="app-badge">Julefrokost 2025</div>
             <h1 className="app-title">Jule Seating Engine</h1>
             <p className="app-subtitle">
-              Lodtrækning til langbordet. Fair, festligt og fuldt tilfældigt.
+              Lodtrækning til langbordet. Dansk hygge, levende lys og helt fair
+              pladser.
             </p>
 
             <div className="app-garland">
@@ -140,6 +146,13 @@ export default function App() {
               <span className="garland-light garland-light--green" />
               <span className="garland-light garland-light--gold" />
               <span className="garland-light garland-light--red" />
+            </div>
+
+            <div className="hygge-tagline">
+              <span className="hygge-pill">Stearinlys</span>
+              <span className="hygge-pill">Gløgg</span>
+              <span className="hygge-pill">Risalamande</span>
+              <span className="hygge-pill">Snak på kryds og tværs</span>
             </div>
           </div>
 
@@ -160,7 +173,7 @@ export default function App() {
               />
             </div>
             <button onClick={handleReset} className="reset-button">
-              Reset alle pladser
+              Nulstil pladekort
             </button>
           </div>
         </header>
@@ -168,6 +181,21 @@ export default function App() {
         <main className="app-main">
           <div className="table-wrapper">
             <div className="table-area">
+              <div className="table-candles">
+                <div className="candle">
+                  <div className="candle-flame" />
+                  <div className="candle-body" />
+                </div>
+                <div className="candle candle--small">
+                  <div className="candle-flame" />
+                  <div className="candle-body" />
+                </div>
+                <div className="candle">
+                  <div className="candle-flame" />
+                  <div className="candle-body" />
+                </div>
+              </div>
+
               <div className="seat-row seat-row--top">
                 {topSeats.map((seat) => (
                   <SeatBubble
@@ -186,6 +214,8 @@ export default function App() {
                       <span className="runner runner--red" />
                       <span className="runner runner--green" />
                     </div>
+                    <div className="table-placemat table-placemat--left" />
+                    <div className="table-placemat table-placemat--right" />
                   </div>
                 </div>
               </div>
@@ -232,7 +262,7 @@ export default function App() {
                   <div className="result-label">Din plads</div>
                   <div className="result-value">{lastResult.id}</div>
                   <div className="result-hint">
-                    Find nummeret på bordet og sæt dig til rette.
+                    Find nummeret på bordet. Resten er snak, latter og hygge.
                   </div>
                 </div>
               ) : (
@@ -243,19 +273,19 @@ export default function App() {
             </div>
 
             <div className="xmas-card">
-              <div className="xmas-card-header">Julefakta</div>
+              <div className="xmas-card-header">Julehygge regler</div>
               <p className="xmas-card-text">
-                Hver plads trækkes tilfældigt, og alle ledige pladser har samme
-                sandsynlighed. Ingen favorisering, kun statistik.
+                Lodtrækningen er helt tilfældig. Alle ledige pladser har samme
+                chance. Det eneste ikke-tilfældige er hyggen.
               </p>
               <p className="xmas-card-text">
-                Når alle pladser er taget, låser systemet automatisk og siger
-                pænt tak for i aften.
+                Når du har fået en plads, så hjælp den næste op til skærmen og
+                hold øje med hvilket sæde der lyser op.
               </p>
             </div>
 
             <div className="legend-card legend-card--xmas">
-              <h3 className="legend-title">Status</h3>
+              <h3 className="legend-title">Pladekort</h3>
               <div className="legend-row">
                 <span className="legend-dot legend-dot--free" />
                 <span>Ledig plads</span>
@@ -266,8 +296,33 @@ export default function App() {
               </div>
               <div className="legend-row">
                 <span className="legend-dot legend-dot--highlight" />
-                <span>Aktuelt lodtrækning</span>
+                <span>Aktuel lodtrækning</span>
               </div>
+            </div>
+
+            <div className="history-card">
+              <h3 className="history-title">Trukne pladser</h3>
+              {history.length === 0 ? (
+                <div className="history-empty">
+                  Ingen pladser endnu. Første lodtrækning sætter stemningen.
+                </div>
+              ) : (
+                <div className="history-list">
+                  {history
+                    .slice()
+                    .reverse()
+                    .map((seat) => (
+                      <div key={seat.id} className="history-item">
+                        <span className="history-seat-number">
+                          Plads {seat.id}
+                        </span>
+                        <span className="history-seat-meta">
+                          {seat.side === "top" ? "Øverste række" : "Nederste række"}
+                        </span>
+                      </div>
+                    ))}
+                </div>
+              )}
             </div>
           </aside>
         </main>

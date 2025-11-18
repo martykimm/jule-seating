@@ -15,7 +15,7 @@ body,
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+  background: radial-gradient(circle at top, #020617 0, #020617 45%, #000 100%);
   color: #e5e7eb;
 }
 
@@ -36,7 +36,8 @@ body {
   inset: -20%;
   background:
     radial-gradient(circle at 15% 15%, rgba(220, 38, 38, 0.18), transparent),
-    radial-gradient(circle at 85% 80%, rgba(22, 163, 74, 0.22), transparent);
+    radial-gradient(circle at 85% 80%, rgba(22, 163, 74, 0.22), transparent),
+    radial-gradient(circle at 50% 50%, rgba(250, 204, 21, 0.1), transparent);
   opacity: 0.9;
   filter: blur(40px);
   z-index: 0;
@@ -84,10 +85,10 @@ body {
   max-width: 1200px;
   border-radius: 1.75rem;
   border: 1px solid rgba(248, 250, 252, 0.12);
-  background: linear-gradient(
-    145deg,
-    rgba(15, 23, 42, 0.98),
-    rgba(15, 23, 42, 0.99)
+  background: radial-gradient(
+    circle at 10% 0%,
+    rgba(15, 23, 42, 1),
+    rgba(15, 23, 42, 0.98)
   );
   box-shadow:
     0 25px 80px rgba(15, 23, 42, 0.9),
@@ -103,7 +104,7 @@ body {
 .app-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 1.5rem;
   flex-wrap: wrap;
   border-bottom: 1px solid rgba(248, 250, 252, 0.08);
@@ -113,7 +114,7 @@ body {
 .app-title-block {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.45rem;
 }
 
 .app-badge {
@@ -129,7 +130,7 @@ body {
 }
 
 .app-title {
-  font-size: 2.6rem;
+  font-size: 2.7rem;
   font-weight: 700;
   letter-spacing: -0.04em;
   background: linear-gradient(120deg, #fef9c3, #fecaca, #bbf7d0);
@@ -139,9 +140,9 @@ body {
 }
 
 .app-subtitle {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #e5e7eb;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 /* Garland */
@@ -174,6 +175,24 @@ body {
 .garland-light--gold {
   background: #facc15;
   box-shadow: 0 0 18px rgba(250, 204, 21, 0.8);
+}
+
+/* Hygge tags */
+
+.hygge-tagline {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.hygge-pill {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
 }
 
 /* Controls */
@@ -221,7 +240,7 @@ body {
   border-radius: 999px;
   border: 1px solid rgba(252, 211, 77, 0.9);
   padding: 0.45rem 0.9rem;
-  background: rgba(30, 64, 175, 0.1);
+  background: radial-gradient(circle at top, rgba(30, 64, 175, 0.3), #020617);
   color: #fef3c7;
   font-size: 0.8rem;
   cursor: pointer;
@@ -261,7 +280,7 @@ body {
   }
 
   .side-panel {
-    width: 340px;
+    width: 360px;
   }
 }
 
@@ -291,12 +310,73 @@ body {
     0 18px 50px rgba(15, 23, 42, 0.9);
 }
 
+/* Stearinlys midt på bordet */
+
+.table-candles {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  padding-top: 0.5rem;
+  z-index: 1;
+  gap: 0.7rem;
+}
+
+.candle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.candle--small .candle-body {
+  height: 14px;
+}
+
+.candle-flame {
+  width: 10px;
+  height: 16px;
+  border-radius: 999px 999px 60% 60%;
+  background: radial-gradient(circle at 50% 20%, #fef9c3, #fb923c);
+  box-shadow:
+    0 0 12px rgba(251, 191, 36, 0.7),
+    0 0 24px rgba(252, 211, 77, 0.9);
+  animation: candleFlicker 1.4s ease-in-out infinite alternate;
+}
+
+.candle-body {
+  width: 10px;
+  height: 18px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #f9fafb, #e5e7eb);
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.5);
+}
+
+@keyframes candleFlicker {
+  from {
+    transform: translateY(0) scale(1);
+    box-shadow:
+      0 0 10px rgba(251, 191, 36, 0.7),
+      0 0 18px rgba(252, 211, 77, 0.8);
+  }
+  to {
+    transform: translateY(-1px) scale(1.05);
+    box-shadow:
+      0 0 14px rgba(251, 191, 36, 0.9),
+      0 0 26px rgba(252, 211, 77, 0.95);
+  }
+}
+
+/* Seat rows */
+
 .seat-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 0.6rem;
   padding: 0 0.5rem;
+  z-index: 2;
 }
 
 .seat-row--top {
@@ -306,6 +386,8 @@ body {
 .seat-row--bottom {
   margin-top: 0.4rem;
 }
+
+/* Bord */
 
 .table-middle {
   flex: 1;
@@ -327,7 +409,7 @@ body {
 }
 
 .table-board--xmas {
-  background: linear-gradient(135deg, #7f1d1d, #064e3b);
+  background: linear-gradient(135deg, #7f1d1d, #14532d);
 }
 
 .table-board-inner {
@@ -345,6 +427,8 @@ body {
   font-size: 0.95rem;
   letter-spacing: 0.24em;
 }
+
+/* Bordløbere og dækkeservietter */
 
 .table-board-runners {
   position: absolute;
@@ -367,6 +451,24 @@ body {
 
 .runner--green {
   background: linear-gradient(90deg, #14532d, #bbf7d0);
+}
+
+.table-placemat {
+  position: absolute;
+  width: 68px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid rgba(248, 250, 252, 0.1);
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.92), #020617);
+  box-shadow: 0 0 14px rgba(15, 23, 42, 0.7);
+}
+
+.table-placemat--left {
+  left: 26px;
+}
+
+.table-placemat--right {
+  right: 26px;
 }
 
 /* Sæder */
@@ -628,6 +730,64 @@ body {
 .legend-dot--highlight {
   background: #facc15;
   box-shadow: 0 0 10px rgba(250, 204, 21, 0.9);
+}
+
+/* History / pladekort */
+
+.history-card {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  background: radial-gradient(circle at 0 0, #111827, #020617);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 180px;
+  overflow: hidden;
+}
+
+.history-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.history-empty {
+  font-size: 0.85rem;
+  color: #e5e7eb;
+  opacity: 0.85;
+}
+
+.history-list {
+  margin-top: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  overflow-y: auto;
+  padding-right: 0.2rem;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.45rem;
+  border-radius: 0.5rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(55, 65, 81, 0.8);
+}
+
+.history-seat-number {
+  font-weight: 600;
+  color: #fef9c3;
+}
+
+.history-seat-meta {
+  color: #9ca3af;
+  font-size: 0.8rem;
 }
 
 /* Responsiv */
