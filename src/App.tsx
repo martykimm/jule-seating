@@ -122,14 +122,25 @@ export default function App() {
   return (
     <div className="app-root">
       <div className="app-backdrop" />
+      <div className="snow-layer snow-layer--slow" />
+      <div className="snow-layer snow-layer--fast" />
+
       <div className="app-container">
         <header className="app-header">
           <div className="app-title-block">
-            <div className="app-badge">Julefrokost</div>
-            <h1 className="app-title">Seating Engine</h1>
+            <div className="app-badge">Julefrokost 2024</div>
+            <h1 className="app-title">Jule Seating Engine</h1>
             <p className="app-subtitle">
-              Tryk på knappen. Få et sædenummer. Ingen snyd, ingen favorisering.
+              Lodtrækning til langbordet. Fair, festligt og fuldt tilfældigt.
             </p>
+
+            <div className="app-garland">
+              <span className="garland-light garland-light--red" />
+              <span className="garland-light garland-light--gold" />
+              <span className="garland-light garland-light--green" />
+              <span className="garland-light garland-light--gold" />
+              <span className="garland-light garland-light--red" />
+            </div>
           </div>
 
           <div className="app-controls">
@@ -168,8 +179,14 @@ export default function App() {
               </div>
 
               <div className="table-middle">
-                <div className="table-board">
-                  <div className="table-board-inner">Langbord</div>
+                <div className="table-board table-board--xmas">
+                  <div className="table-board-inner">
+                    Julebord
+                    <div className="table-board-runners">
+                      <span className="runner runner--red" />
+                      <span className="runner runner--green" />
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -195,7 +212,7 @@ export default function App() {
               onClick={spinForSeat}
               disabled={isSpinning || availableSeats.length === 0}
               className={
-                "spin-button" +
+                "spin-button spin-button--xmas" +
                 (isSpinning || availableSeats.length === 0
                   ? " spin-button--disabled"
                   : "")
@@ -205,24 +222,39 @@ export default function App() {
                 ? "Alle pladser er taget"
                 : isSpinning
                 ? "Finder plads..."
-                : "FIND DIN PLADS"}
+                : "TRÆK DIN JULEPLADS"}
             </button>
 
-            <div className="result-card">
-              <h2 className="result-title">Sidste resultat</h2>
+            <div className="result-card result-card--xmas">
+              <h2 className="result-title">Sidste lodtrækning</h2>
               {lastResult ? (
                 <div className="result-big">
                   <div className="result-label">Din plads</div>
                   <div className="result-value">{lastResult.id}</div>
+                  <div className="result-hint">
+                    Find nummeret på bordet og sæt dig til rette.
+                  </div>
                 </div>
               ) : (
                 <div className="result-placeholder">
-                  Gå op til skærmen og tryk på knappen for at få din plads.
+                  Gå op til skærmen, tryk på knappen og få din juleplads.
                 </div>
               )}
             </div>
 
-            <div className="legend-card">
+            <div className="xmas-card">
+              <div className="xmas-card-header">Julefakta</div>
+              <p className="xmas-card-text">
+                Hver plads trækkes tilfældigt, og alle ledige pladser har samme
+                sandsynlighed. Ingen favorisering, kun statistik.
+              </p>
+              <p className="xmas-card-text">
+                Når alle pladser er taget, låser systemet automatisk og siger
+                pænt tak for i aften.
+              </p>
+            </div>
+
+            <div className="legend-card legend-card--xmas">
               <h3 className="legend-title">Status</h3>
               <div className="legend-row">
                 <span className="legend-dot legend-dot--free" />
