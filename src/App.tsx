@@ -122,9 +122,10 @@ export default function App() {
 
   return (
     <div className="app-root">
+      {/* baggrundslag */}
       <div className="app-backdrop" />
-      <div className="snow-layer snow-layer--slow" />
-      <div className="snow-layer snow-layer--fast" />
+      <div className="snow-layer snow-layer--back" />
+      <div className="snow-layer snow-layer--front" />
       <div className="snow-hill" />
       <div className="xmas-forest xmas-forest--left">
         <div className="xmas-tree" />
@@ -134,8 +135,26 @@ export default function App() {
         <div className="xmas-tree" />
         <div className="xmas-tree xmas-tree--small" />
       </div>
+
+      {/* flyvende julemand */}
       <div className="santa-flight">
-        <div className="santa-sleigh" />
+        <div className="santa-sleigh">
+          <div className="sleigh-base" />
+          <div className="sleigh-runner" />
+          <div className="santa-body" />
+          <div className="santa-head" />
+          <div className="santa-beard" />
+          <div className="santa-hat" />
+          <div className="santa-reindeer santa-reindeer--1" />
+          <div className="santa-reindeer santa-reindeer--2" />
+          <div className="santa-reindeer santa-reindeer--3" />
+        </div>
+      </div>
+
+      {/* nisser ved snebakken */}
+      <div className="xmas-elves">
+        <div className="elf elf--left" />
+        <div className="elf elf--right" />
       </div>
 
       <div className="app-container">
