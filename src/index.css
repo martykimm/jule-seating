@@ -665,82 +665,9 @@ body {
     2px 38px 0 -8px #f9fafb;
 }
 
-/* Nisse bælte */
-.elf {
-  border: none;
-}
-
-.elf:before {
-  border-bottom: 4px solid #1f2937;
-}
-
-/* Arme på nissen */
-.elf > * {
-  position: relative;
-}
-
-/* Venstre arm */
-.elf::before::after {
-  content: "";
-  position: absolute;
-  top: 8px;
-  left: -10px;
-  width: 8px;
-  height: 20px;
-  background: linear-gradient(135deg, #6b7280, #4b5563);
-  border-radius: 4px;
-  transform: rotate(-25deg);
-}
-
-/* Højre arm */
-.elf::after::before {
-  content: "";
-  position: absolute;
-  bottom: -36px;
-  right: -12px;
-  width: 8px;
-  height: 20px;
-  background: linear-gradient(135deg, #6b7280, #4b5563);
-  border-radius: 4px;
-  transform: rotate(25deg);
-}
-
-/* Nisse ben/støvler */
-.elf::after::after {
-  content: "";
-  position: absolute;
-  bottom: -54px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 14px;
-  background: #1f2937;
-  border-radius: 3px 3px 8px 8px;
-  box-shadow: 
-    12px 0 0 #1f2937,
-    0 0 8px rgba(31, 41, 55, 0.5),
-    12px 0 8px rgba(31, 41, 55, 0.5);
-}
-
-/* Ekstra detaljer - nissehue dusk */
+/* Ekstra detaljer - nissehue dusk og filter */
 .elf {
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-}
-
-.elf::after {
-  position: relative;
-}
-
-.elf::after::before {
-  content: "";
-  position: absolute;
-  top: -28px;
-  left: -6px;
-  width: 10px;
-  height: 10px;
-  background: #fef3c7;
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(254, 243, 199, 0.8);
 }
 
 /* App container */
